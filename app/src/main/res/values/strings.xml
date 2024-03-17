@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SalesmanApp</string>
+    <string name="search">Suche</string>
 </resources>
