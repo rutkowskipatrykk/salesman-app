@@ -22,6 +22,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.salesmanapp.R
+import com.example.salesmanapp.ui.theme.spacing
 
 @Composable
 fun SearchField(
@@ -72,7 +73,7 @@ fun SearchField(
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(MaterialTheme.spacing.medium)
             .shadow(
                 elevation = 2.dp,
             )

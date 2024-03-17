@@ -26,6 +26,7 @@ import com.example.salesmanapp.R
 import com.example.salesmanapp.feature_search.presentation.search.components.CustomTopBar
 import com.example.salesmanapp.feature_search.presentation.search.components.SalesmanRow
 import com.example.salesmanapp.feature_search.presentation.search.components.SearchField
+import com.example.salesmanapp.ui.theme.spacing
 
 @Composable
 fun SearchScreen(
@@ -43,7 +44,7 @@ fun SearchScreen(
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier
-                            .padding(start = 16.dp)
+                            .padding(start = MaterialTheme.spacing.medium)
                             .size(24.dp)
                             .clickable(onClick = onBackClick)
                     )
@@ -73,7 +74,7 @@ fun SearchScreen(
             }
 
             item {
-                Spacer(modifier = Modifier.height(36.dp))
+                Spacer(modifier = Modifier.height(24.dp))
             }
 
             if (viewModel.isLoading.value) {

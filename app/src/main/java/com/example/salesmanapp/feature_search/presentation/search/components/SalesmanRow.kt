@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.salesmanapp.ui.theme.spacing
 
 @Composable
 fun SalesmanRow(
@@ -41,7 +42,7 @@ fun SalesmanRow(
             }
             .fillMaxWidth()
             .animateContentSize()
-            .padding(start = 16.dp)
+            .padding(start = MaterialTheme.spacing.medium)
     ) {
         Spacer(modifier = Modifier.height(16.dp))
         Row(
@@ -49,7 +50,7 @@ fun SalesmanRow(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(end = 16.dp)
+                .padding(end = MaterialTheme.spacing.medium)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
