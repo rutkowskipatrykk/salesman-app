@@ -12,8 +12,6 @@ constructor(
     private val mockSalesmanListResponse: List<Salesman>
 ) : SearchRepository {
 
-
-
     override suspend fun searchSalesman(postCodeQuery: String): List<Salesman> {
         return if (postCodeQuery.isEmpty()) {
             emptyList()
