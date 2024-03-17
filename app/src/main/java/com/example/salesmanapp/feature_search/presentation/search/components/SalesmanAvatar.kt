@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,7 +33,10 @@ fun SalesmanAvatar(
                 height = 42.dp
             )
     ) {
-        Text(text = name.trim().first().toString())
+        Text(
+            text = name.trim().first().toString(),
+            style = MaterialTheme.typography.titleLarge
+        )
     }
 }
 

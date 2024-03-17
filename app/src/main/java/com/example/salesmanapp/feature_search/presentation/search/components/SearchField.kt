@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -32,7 +33,12 @@ fun SearchField(
             if (it.length <= maxQueryLength)
                 onValueChanged(it)
         },
-        placeholder = { Text(stringResource(id = R.string.search)) },
+        placeholder = {
+            Text(
+                text = stringResource(id = R.string.search),
+                style = MaterialTheme.typography.titleMedium
+            )
+        },
         leadingIcon = {
             Icon(
                 bitmap = ImageBitmap.imageResource(R.drawable.ic_search),
