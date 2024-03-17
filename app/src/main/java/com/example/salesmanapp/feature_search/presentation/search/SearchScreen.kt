@@ -14,11 +14,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
@@ -48,10 +46,6 @@ fun SearchScreen() {
                         modifier = Modifier.padding(start = 16.dp),
                     )
                 },
-                colors = TopAppBarDefaults.topAppBarColors().copy(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    navigationIconContentColor = Color.White
-                ),
             )
 
         }
@@ -96,8 +90,7 @@ fun SearchScreen() {
                 ) {
                     SalesmanRow(
                         name = viewModel.salesmanList[it].name,
-                        postCodes = viewModel.salesmanList[it].areas,
-                        modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+                        postCodes = viewModel.salesmanList[it].areas
                     )
                 }
             }

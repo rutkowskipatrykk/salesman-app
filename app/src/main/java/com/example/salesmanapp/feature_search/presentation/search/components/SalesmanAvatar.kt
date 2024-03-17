@@ -26,8 +26,12 @@ fun SalesmanAvatar(
         contentAlignment = Alignment.Center,
         modifier = modifier
             .clip(CircleShape)
-            .border(1.dp, Color.Gray, CircleShape)
-            .background(Color.LightGray)
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.outlineVariant,
+                shape = CircleShape
+            )
+            .background(MaterialTheme.colorScheme.secondaryContainer)
             .size(
                 width = 41.dp,
                 height = 42.dp

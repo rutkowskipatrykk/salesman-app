@@ -1,5 +1,6 @@
 package com.example.salesmanapp.feature_search.presentation.search.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -48,13 +49,16 @@ fun SearchField(
         trailingIcon = {
             Icon(
                 bitmap = ImageBitmap.imageResource(R.drawable.ic_microphone),
-                contentDescription = null
+                contentDescription = null,
+                Modifier.clickable {
+
+                }
             )
         },
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedContainerColor = Color(0xFFFFFFFF),
             focusedContainerColor = Color(0xFFFFFFFF),
-            focusedBorderColor = Color(0xFFE5E5E5),
+            focusedBorderColor = Color(0xFFFFFFFF),
             unfocusedBorderColor = Color(0xFFE5E5E5),
         ),
         singleLine = true,
@@ -63,7 +67,7 @@ fun SearchField(
             .fillMaxWidth()
             .padding(16.dp)
             .shadow(
-                elevation = 10.dp,
+                elevation = 2.dp,
             )
     )
 }
@@ -71,5 +75,9 @@ fun SearchField(
 @Preview
 @Composable
 fun SearchFieldPreview() {
-//    SearchField()
+    SearchField(
+        "Search",
+        5,
+        {},
+    )
 }
