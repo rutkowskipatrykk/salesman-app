@@ -18,13 +18,17 @@ constructor() : SearchRepository {
     )
 
     override suspend fun searchSalesman(postCodeQuery: String): List<Salesman> {
-        return salesmanList.filter {
-            it.areas.any { area ->
-                if (area.contains(ASTRIX) && area.length <= postCodeQuery.length) {
-                    val querySubstring = postCodeQuery.substring(0, area.indexOf(ASTRIX))
-                    querySubstring == area.substring(0, area.indexOf(ASTRIX))
-                } else {
-                    area.startsWith(postCodeQuery)
+        return if (postCodeQuery.isEmpty()) {
+            emptyList()
+        } else {
+            salesmanList.filter {
+                it.areas.any { area ->
+                    if (area.contains(ASTRIX) && area.length <= postCodeQuery.length) {
+                        val querySubstring = postCodeQuery.substring(0, area.indexOf(ASTRIX))
+                        querySubstring == area.substring(0, area.indexOf(ASTRIX))
+                    } else {
+                        area.startsWith(postCodeQuery)
+                    }
                 }
             }
         }

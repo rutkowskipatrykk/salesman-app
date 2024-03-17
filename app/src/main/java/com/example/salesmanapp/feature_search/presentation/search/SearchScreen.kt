@@ -1,19 +1,19 @@
 package com.example.salesmanapp.feature_search.presentation.search
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,29 +23,31 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.salesmanapp.R
+import com.example.salesmanapp.feature_search.presentation.search.components.CustomTopBar
 import com.example.salesmanapp.feature_search.presentation.search.components.SalesmanRow
 import com.example.salesmanapp.feature_search.presentation.search.components.SearchField
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchScreen() {
+fun SearchScreen(
+    onBackClick: () -> Unit
+) {
     val viewModel = hiltViewModel<SearchScreenViewModel>()
+
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(id = R.string.addresses),
-                        style = MaterialTheme.typography.titleSmall,
-                    )
-                },
+            CustomTopBar(
+                title = stringResource(id = R.string.addresses),
                 navigationIcon = {
                     Icon(
                         bitmap = ImageBitmap.imageResource(R.drawable.arrow_back),
                         contentDescription = null,
-                        modifier = Modifier.padding(start = 16.dp),
+                        tint = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier
+                            .padding(start = 16.dp)
+                            .size(24.dp)
+                            .clickable(onClick = onBackClick)
                     )
-                },
+                }
             )
 
         }
@@ -85,12 +87,12 @@ fun SearchScreen() {
                 }
             } else {
                 items(
-                    count = viewModel.salesmanList.size,
-                    key = { viewModel.salesmanList[it].name },
-                ) {
+                    items = viewModel.salesmanList,
+                    key = { salesman -> salesman.name to salesman.areas }
+                ) { salesman ->
                     SalesmanRow(
-                        name = viewModel.salesmanList[it].name,
-                        postCodes = viewModel.salesmanList[it].areas
+                        name = salesman.name,
+                        postCodes = salesman.areas
                     )
                 }
             }
