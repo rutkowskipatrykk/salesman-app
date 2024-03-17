@@ -1,7 +1,12 @@
 package com.example.salesmanapp.feature_search.presentation.search
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SearchScreenViewModel: ViewModel() {
+@HiltViewModel
+class SearchScreenViewModel
+@Inject
+constructor() : ViewModel() {
 
 }
