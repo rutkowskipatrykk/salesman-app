@@ -11,7 +11,11 @@ constructor(
 ){
 
     operator fun invoke(postCode: String) = flow {
-        emit(searchRepository.searchSalesman(postCode))
+        if (postCode.isEmpty()) {
+            emit(emptyList())
+        } else {
+            emit(searchRepository.searchSalesman(postCode))
+        }
     }
 
 }

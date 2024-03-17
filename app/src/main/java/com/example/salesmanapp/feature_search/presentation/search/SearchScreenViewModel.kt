@@ -9,8 +9,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.salesmanapp.feature_search.domain.model.Salesman
 import com.example.salesmanapp.feature_search.domain.use_case.GetSalesmanListByArea
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onCompletion
@@ -18,7 +20,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private val SEARCH_DELAY = 1000L
+private const val SEARCH_DELAY = 1000L
 
 @OptIn(FlowPreview::class)
 @HiltViewModel
@@ -28,7 +30,8 @@ constructor(
     private val getSalesmanListByArea: GetSalesmanListByArea
 ) : ViewModel() {
 
-    private val searchFlow: MutableSharedFlow<String> = MutableSharedFlow()
+    private val _searchFlow: MutableSharedFlow<String> = MutableSharedFlow()
+    val searchFlow = _searchFlow.asSharedFlow()
 
     private val _searchValue = mutableStateOf("")
     val searchValue: State<String> = _searchValue
@@ -40,7 +43,7 @@ constructor(
     val salesmanList: SnapshotStateList<Salesman> = _salesmanList
 
     init {
-        searchFlow
+        _searchFlow
             .debounce(SEARCH_DELAY)
             .onEach { postCode ->
                 getSalesman(postCode)
@@ -54,7 +57,7 @@ constructor(
                 _isLoading.value = true
                 _searchValue.value = action.searchValue
                 viewModelScope.launch {
-                    searchFlow
+                    _searchFlow
                         .emit(action.searchValue)
                 }
             }

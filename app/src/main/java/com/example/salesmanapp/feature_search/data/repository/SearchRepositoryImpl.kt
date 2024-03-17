@@ -8,20 +8,17 @@ private const val ASTRIX = "*"
 
 class SearchRepositoryImpl
 @Inject
-constructor() : SearchRepository {
+constructor(
+    private val mockSalesmanListResponse: List<Salesman>
+) : SearchRepository {
 
-    private val salesmanList = listOf(
-        Salesman(name = "Artem Titarenko", areas = listOf("76133")),
-        Salesman(name = "Bernd Schmitt", areas = listOf("7619*")),
-        Salesman(name = "Chris Krapp", areas = listOf("762*")),
-        Salesman(name = "Alex Uber", areas = listOf("86*"))
-    )
+
 
     override suspend fun searchSalesman(postCodeQuery: String): List<Salesman> {
         return if (postCodeQuery.isEmpty()) {
             emptyList()
         } else {
-            salesmanList.filter {
+            mockSalesmanListResponse.filter {
                 it.areas.any { area ->
                     if (area.contains(ASTRIX) && area.length <= postCodeQuery.length) {
                         val querySubstring = postCodeQuery.substring(0, area.indexOf(ASTRIX))
